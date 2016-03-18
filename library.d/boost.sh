@@ -12,7 +12,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 
 NAME='boost_1_60_0'
-URL='http://jaist.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz'
+URL='http://pilotfiber.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz'
 MD5='28f58b9a33469388302110562bdf6188'
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
@@ -25,7 +25,10 @@ function runLinux {
     ./bootstrap.sh >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    ./b2 -j8 --prefix=$TPARTY_LOCAL --layout=system variant=release link=shared threading=multi install >> $LOG_PATH
+    ./b2 -j8 --prefix=$TPARTY_LOCAL \
+         variant=release link=shared threading=multi \
+         install >> $LOG_PATH
+         # --layout=system
 }
 
 LINUX_FUNC=runLinux
