@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ -z $OPM_HOME ]]; then
-    echo 'Not defined OPM_HOME variable.'
+if [[ -z $TPARTY_HOME ]]; then
+    echo 'Not defined TPARTY_HOME variable.'
     exit 1
 fi
 
