@@ -22,7 +22,12 @@ LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
 function runLinux {
     code=$?; [[ $code != 0 ]] && exit $code
-    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL -G 'Unix Makefiles' >> $LOG_PATH
+    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+          -DBUILD_SHARED_LIBS=ON \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DWITH_CUDA=OFF \
+          -DBUILD_opencv_python2=OFF \
+          -G 'Unix Makefiles' >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make -j8 >> $LOG_PATH
