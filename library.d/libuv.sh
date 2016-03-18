@@ -30,8 +30,8 @@ function runLinux {
     code=$?; [[ $code != 0 ]] && exit $code
     make >> $LOG_PATH
 
-    code=$?; [[ $code != 0 ]] && exit $code
-    make check >> $LOG_PATH
+    #code=$?; [[ $code != 0 ]] && exit $code
+    #make check >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make install >> $LOG_PATH
