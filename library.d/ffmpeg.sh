@@ -21,7 +21,6 @@ ALREADY="$TPARTY_LOCAL/lib/libavcodec.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
 function runLinux {
-    FLAGS='--pkg-config-flags=--static'
     FLAGS="$FLAGS --extra-cflags=-fPIC"
     FLAGS="$FLAGS --enable-static"
     FLAGS="$FLAGS --enable-shared"
@@ -57,4 +56,3 @@ WINDOWS_FUNC=runLinux
 . general-build "$NAME" "$URL" "$MD5" \
     "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
     "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
-
