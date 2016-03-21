@@ -20,7 +20,7 @@ WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libglog.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
-function runLinux {
+function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
     ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
 
@@ -31,11 +31,12 @@ function runLinux {
     make install >> $LOG_PATH
 }
 
-LINUX_FUNC=runLinux
-MACOSX_FUNC=runLinux
-WINDOWS_FUNC=runLinux
+LINUX_FUNC=runCommon
+MACOSX_FUNC=runCommon
+WINDOWS_FUNC=runCommon
 
-. general-build "$NAME" "$URL" "$MD5" \
-    "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
+. general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
+    "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
+    "$DEPENDENCIES"
 

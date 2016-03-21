@@ -21,7 +21,7 @@ export PATH=$BIN_DIR:$LOCAL_DIR/bin:$PATH
 export CPATH=$LOCAL_DIR/include:$CPATH
 export LIBRARY_PATH=$LOCAL_DIR/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$LOCAL_DIR/lib:$LD_LIBRARY_PATH
-export DYLD_LIBRARY_PATH=$LOCAL_DIR/lib:$DYLD_LIBRARY_PATH
+#export DYLD_LIBRARY_PATH=$LOCAL_DIR/lib:$DYLD_LIBRARY_PATH
 
 ## Warning: Don't use the quoting("...").
 for cursor in $INSTALL_DIR/*.sh; do
@@ -37,3 +37,4 @@ for cursor in $INSTALL_DIR/*.sh; do
 done
 
 echo 'Done.'
+

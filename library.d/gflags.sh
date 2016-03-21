@@ -20,11 +20,12 @@ WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libgflags.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
-function runLinux {
+function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
-    cmake -DCMAKE_CXX_FLAGS=-fPIC \
-          -DCMAKE_C_FLAGS=-fPIC \
-          -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+          -DCMAKE_BUILD_TYPE=Release           \
+          -DCMAKE_CXX_FLAGS=-fPIC              \
+          -DCMAKE_C_FLAGS=-fPIC                \
           -G 'Unix Makefiles' >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
@@ -34,11 +35,12 @@ function runLinux {
     make install >> $LOG_PATH
 }
 
-LINUX_FUNC=runLinux
-MACOSX_FUNC=runLinux
-WINDOWS_FUNC=runLinux
+LINUX_FUNC=runCommon
+MACOSX_FUNC=runCommon
+WINDOWS_FUNC=runCommon
 
-. general-build "$NAME" "$URL" "$MD5" \
-    "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
+. general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
+    "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
+    "$DEPENDENCIES"
 

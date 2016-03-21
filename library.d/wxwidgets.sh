@@ -20,22 +20,36 @@ WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
-function runLinux {
+PLATFORM=`platform`
+CORE_COUNT=`cpucount`
+let "THREAD_COUNT = $CORE_COUNT * 2"
+
+case $PLATFORM in
+Windows)
+    THREAD_FLAG=''
+    ;;
+*)
+    THREAD_FLAG=-j$THREAD_COUNT
+    ;;
+esac
+
+function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
     ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    make >> $LOG_PATH
+    make $THREAD_FLAG >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make install >> $LOG_PATH
 }
 
-LINUX_FUNC=runLinux
-MACOSX_FUNC=runLinux
-WINDOWS_FUNC=runLinux
+LINUX_FUNC=runCommon
+MACOSX_FUNC=runCommon
+WINDOWS_FUNC=runCommon
 
-. general-build "$NAME" "$URL" "$MD5" \
-    "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
+. general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
+    "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
+    "$DEPENDENCIES"
 

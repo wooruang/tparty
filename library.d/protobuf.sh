@@ -9,7 +9,7 @@ TPARTY_LOCAL=$TPARTY_HOME/local
 TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
-DEPENDENCIES=
+DEPENDENCIES=zlib.sh:
 
 NAME='protobuf-3.0.0-beta-2'
 URL='https://codeload.github.com/google/protobuf/tar.gz/v3.0.0-beta-2'
@@ -20,7 +20,20 @@ WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libprotobuf.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
-function runLinux {
+PLATFORM=`platform`
+CORE_COUNT=`cpucount`
+let "THREAD_COUNT = $CORE_COUNT * 2"
+
+case $PLATFORM in
+Windows)
+    THREAD_FLAG=''
+    ;;
+*)
+    THREAD_FLAG=-j$THREAD_COUNT
+    ;;
+esac
+
+function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
     ./autogen.sh >> $LOG_PATH
 
@@ -28,7 +41,7 @@ function runLinux {
     ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    make >> $LOG_PATH
+    make $THREAD_FLAG >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make check >> $LOG_PATH
@@ -37,11 +50,12 @@ function runLinux {
     make install >> $LOG_PATH
 }
 
-LINUX_FUNC=runLinux
-MACOSX_FUNC=runLinux
-WINDOWS_FUNC=runLinux
+LINUX_FUNC=runCommon
+MACOSX_FUNC=runCommon
+WINDOWS_FUNC=runCommon
 
-. general-build "$NAME" "$URL" "$MD5" \
-    "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
+. general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
+    "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
+    "$DEPENDENCIES"
 

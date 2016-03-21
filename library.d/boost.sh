@@ -20,22 +20,42 @@ WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libboost_system.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 
-function runLinux {
+PLATFORM=`platform`
+CORE_COUNT=`cpucount`
+let "THREAD_COUNT = $CORE_COUNT * 2"
+
+case $PLATFORM in
+Windows)
+    THREAD_FLAG=''
+    ;;
+*)
+    THREAD_FLAG=-j$THREAD_COUNT
+    ;;
+esac
+
+FLAGS="--prefix=$TPARTY_LOCAL"
+FLAGS="$FLAGS $THREAD_FLAG"
+FLAGS="$FLAGS variant=release"
+FLAGS="$FLAGS link=shared"
+FLAGS="$FLAGS threading=multi"
+FLAGS="$FLAGS install"
+# Other flags:
+# --layout=system
+
+function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
     ./bootstrap.sh >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    ./b2 -j8 --prefix=$TPARTY_LOCAL \
-         variant=release link=shared threading=multi \
-         install >> $LOG_PATH
-         # --layout=system
+    ./b2 $FLAGS >> $LOG_PATH
 }
 
-LINUX_FUNC=runLinux
-MACOSX_FUNC=runLinux
-WINDOWS_FUNC=runLinux
+LINUX_FUNC=runCommon
+MACOSX_FUNC=runCommon
+WINDOWS_FUNC=runCommon
 
-. general-build "$NAME" "$URL" "$MD5" \
-    "$TEMP_DIR" "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
+. general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
+    "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
+    "$DEPENDENCIES"
 
