@@ -19,6 +19,7 @@ DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME/libraries/liblmdb"
 ALREADY="$TPARTY_LOCAL/lib/liblmdb.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
+THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code

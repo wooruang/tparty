@@ -19,6 +19,7 @@ DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libsnappy.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
+THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code

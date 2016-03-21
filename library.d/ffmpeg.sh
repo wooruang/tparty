@@ -19,19 +19,7 @@ DEST_NAME="$NAME.tar.bz2"
 WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libavcodec.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
-
-PLATFORM=`platform`
-CORE_COUNT=`cpucount`
-let "THREAD_COUNT = $CORE_COUNT * 2"
-
-case $PLATFORM in
-Windows)
-    THREAD_FLAG=''
-    ;;
-*)
-    THREAD_FLAG=-j$THREAD_COUNT
-    ;;
-esac
+THREAD_FLAG=`thread-flag`
 
 FLAGS="--prefix=$TPARTY_LOCAL"
 FLAGS="$FLAGS --extra-cflags=-fPIC"

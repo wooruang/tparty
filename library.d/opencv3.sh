@@ -19,19 +19,7 @@ DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME/build"
 ALREADY="$TPARTY_LOCAL/lib/libopencv_ts.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
-
-PLATFORM=`platform`
-CORE_COUNT=`cpucount`
-let "THREAD_COUNT = $CORE_COUNT * 2"
-
-case $PLATFORM in
-Windows)
-    THREAD_FLAG=''
-    ;;
-*)
-    THREAD_FLAG=-j$THREAD_COUNT
-    ;;
-esac
+THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code

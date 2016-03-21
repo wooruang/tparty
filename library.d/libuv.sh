@@ -19,6 +19,7 @@ DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
 ALREADY="$TPARTY_LOCAL/lib/libuv.a"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
+THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
@@ -28,7 +29,7 @@ function runCommon {
     ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    make >> $LOG_PATH
+    make $THREAD_FLAG >> $LOG_PATH
 
     #code=$?; [[ $code != 0 ]] && exit $code
     #make check >> $LOG_PATH
