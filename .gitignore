@@ -67,4 +67,5 @@ $RECYCLE.BIN/
 /tmp/*
 !/tmp/.keep
 *.tmp
+cache
 
