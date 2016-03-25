@@ -43,9 +43,25 @@ function runCommon {
     done
 }
 
+function runWindows {
+    code=$?; [[ $code != 0 ]] && exit $code
+    cd make # IMPORTANT!!
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make gtest_main.a gtest.a >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    # Custom install process:
+    if [[ ! -d "$TPARTY_LOCAL/include" ]]; then mkdir -p "$TPARTY_LOCAL/include"; fi
+    if [[ ! -d "$TPARTY_LOCAL/lib"     ]]; then mkdir -p "$TPARTY_LOCAL/lib";     fi
+    cp -r ../include/gtest "$TPARTY_LOCAL/include"
+    cp gtest_main.a "$TPARTY_LOCAL/lib/libgtest_main.a"
+    cp gtest.a "$TPARTY_LOCAL/lib/libgtest.a"
+}
+
 LINUX_FUNC=runCommon
 MACOSX_FUNC=runCommon
-WINDOWS_FUNC=runCommon
+WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
