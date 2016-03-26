@@ -37,10 +37,12 @@ function runCommon {
     # make install >> $LOG_PATH
 
     # Custom install process:
+    if [[ ! -d "$TPARTY_LOCAL/include" ]]; then mkdir -p "$TPARTY_LOCAL/include"; fi
+    if [[ ! -d "$TPARTY_LOCAL/lib"     ]]; then mkdir -p "$TPARTY_LOCAL/lib";     fi
     cp -r include/gtest "$TPARTY_LOCAL/include"
     local lib_files=`find . -iname '*.a' | grep -v samples`
     for cursor in $lib_files; do
-        cp $cursor "$TPARTY_LOCAL/lib"
+        cp $cursor "$TPARTY_LOCAL/lib/"
     done
 }
 
