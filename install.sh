@@ -12,6 +12,24 @@ if [[ -z $TPARTY_HOME ]]; then
     export TPARTY_HOME=`getScriptDirectory`
 fi
 
+# Argument value.
+ALWAYS_YES=False
+
+# Argument loop.
+ARG_INDEX=1
+ARG_SIZE=$#
+while [[ $ARG_INDEX -le $ARG_SIZE ]]; do
+    current_arg=$1
+    case $current_arg in
+    -y)
+        ALWAYS_YES=True
+        ;;
+    esac
+
+    let 'ARG_INDEX = ARG_INDEX + 1'
+    shift
+done
+
 WORKING=$PWD
 BIN_DIR=$TPARTY_HOME/bin
 INSTALL_DIR=$TPARTY_HOME/library.d
@@ -49,21 +67,24 @@ for cursor in $(cat $CACHE); do
     fi
 done
 
-# User input.
 echo "Install scripts: $INSTALL_SCRIPTS"
-read -p "Do you want to continue [y/n]?" yn
-case $yn in
-[Yy]*)
-    # Continue!!
-    ;;
-[Nn]*)
-    exit 1
-    ;;
-*)
-    echo "Please answer Yes or No."
-    exit 1
-    ;;
-esac
+
+# User input.
+if [[ "$ALWAYS_YES" != "True" ]]; then
+    read -p "Do you want to continue [y/n]? " yn
+    case $yn in
+    [Yy]*)
+        # Continue!!
+        ;;
+    [Nn]*)
+        exit 1
+        ;;
+    *)
+        echo "Please answer Yes or No."
+        exit 1
+        ;;
+    esac
+fi
 
 ## Warning: Don't use the quoting("...").
 for cursor in $(cat $CACHE); do
