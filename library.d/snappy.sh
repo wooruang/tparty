@@ -23,6 +23,20 @@ THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
+    ./autogen.sh >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make install >> $LOG_PATH
+}
+
+function runMacOSX {
+    code=$?; [[ $code != 0 ]] && exit $code
     patch -p1 < $TPARTY_HOME/library.d/snappy-1.1.3.osx.diff >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
@@ -39,7 +53,7 @@ function runCommon {
 }
 
 LINUX_FUNC=runCommon
-MACOSX_FUNC=runCommon
+MACOSX_FUNC=runMacOSX
 WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
