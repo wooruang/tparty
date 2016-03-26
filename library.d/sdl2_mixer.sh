@@ -9,7 +9,8 @@ TPARTY_LOCAL=$TPARTY_HOME/local
 TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
-DEPENDENCIES=sdl2.sh:ogg.sh:flac.sh:vorbis.sh
+DEPENDENCIES=
+build-dependency $DEPENDENCIES
 
 NAME='SDL2_mixer-2.0.1'
 URL='https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-2.0.1.tar.gz'
@@ -38,6 +39,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

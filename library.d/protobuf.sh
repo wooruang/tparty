@@ -10,6 +10,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
 DEPENDENCIES=zlib.sh:
+build-dependency $DEPENDENCIES
 
 NAME='protobuf-3.0.0-beta-2'
 URL='https://codeload.github.com/google/protobuf/tar.gz/v3.0.0-beta-2'
@@ -44,6 +45,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

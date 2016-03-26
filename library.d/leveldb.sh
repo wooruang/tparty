@@ -10,6 +10,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
 DEPENDENCIES=snappy.sh:
+build-dependency $DEPENDENCIES
 
 NAME='leveldb-1.18'
 URL='https://codeload.github.com/google/leveldb/tar.gz/v1.18'
@@ -36,6 +37,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

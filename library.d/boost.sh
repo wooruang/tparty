@@ -10,6 +10,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
 DEPENDENCIES=
+build-dependency $DEPENDENCIES
 
 NAME='boost_1_60_0'
 URL='http://pilotfiber.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz'
@@ -44,6 +45,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

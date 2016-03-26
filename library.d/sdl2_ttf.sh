@@ -9,7 +9,8 @@ TPARTY_LOCAL=$TPARTY_HOME/local
 TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
-DEPENDENCIES=sdl2.sh:freetype.sh
+DEPENDENCIES=
+build-dependency $DEPENDENCIES
 
 NAME='SDL2_ttf-2.0.13'
 URL='https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.0.13.tar.gz'
@@ -38,6 +39,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

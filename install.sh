@@ -42,7 +42,7 @@ export LD_LIBRARY_PATH=$LOCAL_DIR/lib:$LD_LIBRARY_PATH
 #export DYLD_LIBRARY_PATH=$LOCAL_DIR/lib:$DYLD_LIBRARY_PATH
 
 # Create a cache.
-CACHE=$TPARTY_HOME/cache
+CACHE=cache
 if [[ ! -f "$CACHE" ]]; then
     ## Warning: Don't use the quoting("...").
     for cursor in $INSTALL_DIR/*.sh; do

@@ -10,6 +10,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
 DEPENDENCIES=
+build-dependency $DEPENDENCIES
 
 NAME='googletest-release-1.7.0'
 URL='https://codeload.github.com/google/googletest/tar.gz/release-1.7.0'
@@ -65,6 +66,5 @@ WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 

@@ -10,6 +10,7 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
 DEPENDENCIES=
+build-dependency $DEPENDENCIES
 
 NAME='snappy-1.1.3'
 URL='https://codeload.github.com/google/snappy/tar.gz/1.1.3'
@@ -39,17 +40,7 @@ function runMacOSX {
     code=$?; [[ $code != 0 ]] && exit $code
     patch -p1 < $TPARTY_HOME/library.d/snappy-1.1.3.osx.diff >> $LOG_PATH
 
-    code=$?; [[ $code != 0 ]] && exit $code
-    ./autogen.sh >> $LOG_PATH
-
-    code=$?; [[ $code != 0 ]] && exit $code
-    ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
-
-    code=$?; [[ $code != 0 ]] && exit $code
-    make >> $LOG_PATH
-
-    code=$?; [[ $code != 0 ]] && exit $code
-    make install >> $LOG_PATH
+    runCommon
 }
 
 LINUX_FUNC=runCommon
@@ -58,6 +49,5 @@ WINDOWS_FUNC=runCommon
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
-    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"     \
-    "$DEPENDENCIES"
+    "$LINUX_FUNC" "$MACOSX_FUNC" "$WINDOWS_FUNC"
 
