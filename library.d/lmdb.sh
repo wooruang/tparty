@@ -24,7 +24,15 @@ THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
-    make >> $LOG_PATH
+    make OPT=-O2 >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make "DESTDIR=" "prefix=$TPARTY_LOCAL" install >> $LOG_PATH
+}
+
+function runWindows {
+    code=$?; [[ $code != 0 ]] && exit $code
+    make OPT=-O2 CPPFLAGS=-D_WIN32_WINNT=0x0501 >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make "DESTDIR=" "prefix=$TPARTY_LOCAL" install >> $LOG_PATH
@@ -32,7 +40,7 @@ function runCommon {
 
 LINUX_FUNC=runCommon
 MACOSX_FUNC=runCommon
-WINDOWS_FUNC=runCommon
+WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
