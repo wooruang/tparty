@@ -18,7 +18,7 @@ MD5='70e1dd07f0aa06606f1bc0e3fa15abd3'
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME/build"
-ALREADY="$TPARTY_LOCAL/lib/libopencv_ts.a"
+ALREADY="$TPARTY_LOCAL/include/opencv/cv.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
