@@ -12,31 +12,33 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=snappy.sh:
 build-dependency $DEPENDENCIES
 
-NAME='leveldb-1.18'
-URL='https://codeload.github.com/google/leveldb/tar.gz/v1.18'
-MD5='73770de34a2a5ab34498d2e05b2b7fa0'
+NAME='leveldb-mingw-master'
+URL='https://codeload.github.com/zalanyib/leveldb-mingw/zip/master'
+MD5=
 TEMP_DIR="$TPARTY_TMP/build"
-DEST_NAME="$NAME.tar.gz"
+DEST_NAME="$NAME.zip"
 WORK_NAME="$NAME"
-ALREADY="$TPARTY_LOCAL/lib/libleveldb.a"
+ALREADY="$TPARTY_LOCAL/bin/leveldb.dll"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
 function runCommon {
+    echo "Unsupported platform." 1>&2
+    exit 1
+}
+
+function runWindows {
     code=$?; [[ $code != 0 ]] && exit $code
     make "OPT=-O2 -DNDEBUG" >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
+    if [[ ! -d "$TPARTY_LOCAL/bin"     ]]; then mkdir -p "$TPARTY_LOCAL/bin";     fi
     if [[ ! -d "$TPARTY_LOCAL/include" ]]; then mkdir -p "$TPARTY_LOCAL/include"; fi
     if [[ ! -d "$TPARTY_LOCAL/lib"     ]]; then mkdir -p "$TPARTY_LOCAL/lib";     fi
     cp -rf include/leveldb $TPARTY_LOCAL/include/leveldb
+    cp *.dll $TPARTY_LOCAL/bin/
     cp *.a   $TPARTY_LOCAL/lib/
     cp *.so  $TPARTY_LOCAL/lib/
-}
-
-function runWindows {
-    echo "Unsupported platform." 1>&2
-    exit 1
 }
 
 LINUX_FUNC=runCommon
