@@ -81,6 +81,14 @@ if [[ -f "$ALREADY" ]]; then
     return 0
 fi
 
+## Check to downloaded file.
+if [[ -f "$DEST" && "$MD5" != "" ]]; then
+    if [[ $(checksum "$DEST" "$MD5") != 'True' ]]; then
+        stdout "Removing inaccurate file: $DEST"
+        rm -f "$DEST"
+    fi
+fi
+
 ## DOWNLOAD:
 if [[ -f "$DEST" ]]; then
     stdout "Skip download $NAME"
@@ -96,22 +104,30 @@ else
 fi
 
 ## CHECKSUM:
-CHECKSUM_RESULT=`checksum "$DEST" "$MD5"`
-stdout "Checksum result: $CHECKSUM_RESULT"
+if [[ "$MD5" == "" ]]; then
+    stdout "Skip checksum."
+else
+    CHECKSUM_RESULT=`checksum "$DEST" "$MD5"`
+    stdout "Checksum result: $CHECKSUM_RESULT"
 
-if [[ $CHECKSUM_RESULT != 'True' ]]; then
-    stderr 'Checksum error.'
-    stderr "Remove: $DEST"
-    rm -f "$DEST"
-    exit 1
+    if [[ $CHECKSUM_RESULT != 'True' ]]; then
+        stderr 'Checksum error.'
+        stderr "Remove: $DEST"
+        rm -f "$DEST"
+        exit 1
+    fi
 fi
 
 ## EXTRACT:
 if [[ -d "$WORK_DIR" ]]; then
     stdout "Exists $WORK_DIR"
+    stdout "Skip extract."
 else
     stdout "Extract $DEST"
     extract "$DEST" "$TEMP_DIR"
+    if [[ ! -d "$WORK_DIR" ]]; then
+        mkdir -p "$WORK_DIR"
+    fi
 fi
 
 ## BUILD:
@@ -120,9 +136,6 @@ stdout "Log file: $LOG_PATH"
 stdout "Working: $WORK_DIR"
 stdout "Platform: $PLATFORM"
 
-if [[ ! -d "$WORK_DIR" ]]; then
-    mkdir -p "$WORK_DIR"
-fi
 cd "$WORK_DIR"
 
 case "$PLATFORM" in
