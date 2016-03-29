@@ -33,9 +33,14 @@ function runCommon {
     make install >> $LOG_PATH
 }
 
+function runWindows {
+    echo "Unsupported platform." 1>&2
+    exit 1
+}
+
 LINUX_FUNC=runCommon
 MACOSX_FUNC=runCommon
-WINDOWS_FUNC=runCommon
+WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
