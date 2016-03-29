@@ -43,9 +43,16 @@ function runMacOSX {
     runCommon
 }
 
+function runWindows {
+    code=$?; [[ $code != 0 ]] && exit $code
+    patch -p1 < $TPARTY_HOME/library.d/snappy-1.1.3.mingw.diff >> $LOG_PATH
+
+    runCommon
+}
+
 LINUX_FUNC=runCommon
 MACOSX_FUNC=runMacOSX
-WINDOWS_FUNC=runCommon
+WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
