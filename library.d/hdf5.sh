@@ -33,9 +33,27 @@ function runCommon {
     make install >> $LOG_PATH
 }
 
+function runWindows {
+    mkdir cmake_build_windows
+    cd cmake_build_windows
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+          -DCMAKE_BUILD_TYPE=Release           \
+          -DCMAKE_CXX_FLAGS=-fPIC              \
+          -DCMAKE_C_FLAGS=-fPIC                \
+          -G 'Unix Makefiles' .. >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make VERBOSE=0 >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
+    make install >> $LOG_PATH
+}
+
 LINUX_FUNC=runCommon
 MACOSX_FUNC=runCommon
-WINDOWS_FUNC=runCommon
+WINDOWS_FUNC=runWindows
 
 . general-build "$NAME" "$URL" "$MD5" "$TEMP_DIR"    \
     "$DEST_NAME" "$WORK_NAME" "$ALREADY" "$LOG_PATH" \
