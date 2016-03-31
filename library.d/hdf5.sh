@@ -18,7 +18,7 @@ MD5='b8ed9a36ae142317f88b0c7ef4b9c618'
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
-ALREADY="$TPARTY_LOCAL/lib/libhdf5.a"
+ALREADY="$TPARTY_LOCAL/include/hdf5.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
@@ -40,8 +40,6 @@ function runWindows {
     code=$?; [[ $code != 0 ]] && exit $code
     cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
           -DCMAKE_BUILD_TYPE=Release           \
-          -DCMAKE_CXX_FLAGS=-fPIC              \
-          -DCMAKE_C_FLAGS=-fPIC                \
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
