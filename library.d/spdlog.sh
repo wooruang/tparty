@@ -18,7 +18,7 @@ MD5=
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.zip"
 WORK_NAME="$NAME"
-ALREADY="$TPARTY_LOCAL/include/tinyxml2.h"
+ALREADY="$TPARTY_LOCAL/include/spdlog/spdlog.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 

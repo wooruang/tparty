@@ -29,6 +29,9 @@ function runCommon {
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
+    make >> $LOG_PATH
+
+    code=$?; [[ $code != 0 ]] && exit $code
     make install >> $LOG_PATH
 }
 
