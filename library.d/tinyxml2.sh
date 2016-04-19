@@ -24,11 +24,12 @@ THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
-    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
-          -DCMAKE_INSTALL_LIBDIR=lib           \
-          -DCMAKE_INSTALL_BINDIR=bin           \
-          -DBUILD_SHARED_LIBS=ON               \
-          -DCMAKE_BUILD_TYPE=Release           \
+    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL       \
+          -DCMAKE_INSTALL_LIBDIR=lib                 \
+          -DCMAKE_INSTALL_BINDIR=bin                 \
+          -DCMAKE_INSTALL_NAME_DIR=$TPARTY_LOCAL/lib \
+          -DBUILD_SHARED_LIBS=ON                     \
+          -DCMAKE_BUILD_TYPE=Release                 \
           -G 'Unix Makefiles' . >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
