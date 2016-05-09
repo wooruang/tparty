@@ -23,16 +23,10 @@ LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
 function runCommon {
-    #code=$?; [[ $code != 0 ]] && exit $code
-    #cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
-    #      -DCMAKE_BUILD_TYPE=Release           \
-    #      -G 'Unix Makefiles' .. >> $LOG_PATH
-
-    #code=$?; [[ $code != 0 ]] && exit $code
-    #make >> $LOG_PATH
-
-    #code=$?; [[ $code != 0 ]] && exit $code
-    #make install >> $LOG_PATH
+    code=$?; [[ $code != 0 ]] && exit $code
+    cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+          -DCMAKE_BUILD_TYPE=Release           \
+          -G 'Unix Makefiles' .. >> $LOG_PATH
 
     # Custom install process:
     if [[ ! -d "$TPARTY_LOCAL/include" ]]; then
@@ -41,7 +35,7 @@ function runCommon {
     if [[ -d "$TPARTY_LOCAL/include/libtbag" ]]; then
         rm -rf "$TPARTY_LOCAL/include/libtbag"
     fi
-    cp -r libtbag "$TPARTY_LOCAL/include"
+    cp -r ../libtbag "$TPARTY_LOCAL/include"
 }
 
 LINUX_FUNC=runCommon
