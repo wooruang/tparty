@@ -12,9 +12,16 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
-NAME='hdf5-1.8.16'
-URL='https://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.16.tar.gz'
-MD5='b8ed9a36ae142317f88b0c7ef4b9c618'
+NAME='hdf5-1.8.17'
+
+# HDF5 1.8.16
+#URL='https://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.16.tar.gz'
+#MD5='b8ed9a36ae142317f88b0c7ef4b9c618'
+
+# HDF5 1.8.17
+URL='http://www.hdfgroup.org/ftp/HDF5/current/src/hdf5-1.8.17.tar.gz'
+MD5='7d572f8f3b798a628b8245af0391a0ca'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
