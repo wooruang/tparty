@@ -27,7 +27,7 @@ function runCommon {
     ./autogen.sh >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    ./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
+    ./configure --without-gflags --prefix=$TPARTY_LOCAL >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make >> $LOG_PATH
