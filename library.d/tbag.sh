@@ -29,13 +29,16 @@ function runCommon {
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     # Custom install process:
-    if [[ ! -d "$TPARTY_LOCAL/include" ]]; then
-        mkdir -p "$TPARTY_LOCAL/include"
-    fi
-    if [[ -d "$TPARTY_LOCAL/include/libtbag" ]]; then
-        rm -rf "$TPARTY_LOCAL/include/libtbag"
-    fi
-    cp -r ../libtbag "$TPARTY_LOCAL/include"
+    if [[ ! -d "$TPARTY_LOCAL/include"             ]]; then mkdir -p "$TPARTY_LOCAL/include";             fi
+    if [[ ! -d "$TPARTY_LOCAL/share/libtbag/cmake" ]]; then mkdir -p "$TPARTY_LOCAL/share/libtbag/cmake"; fi
+
+    if [[ -d "$TPARTY_LOCAL/include/libtbag"     ]]; then rm -rf "$TPARTY_LOCAL/include/libtbag";     fi
+    if [[ -d "$TPARTY_LOCAL/share/libtbag/cmake" ]]; then rm -rf "$TPARTY_LOCAL/share/libtbag/cmake"; fi
+
+    if [[ ! -d "$TPARTY_LOCAL/share/libtbag/cmake" ]]; then mkdir -p "$TPARTY_LOCAL/share/libtbag/cmake"; fi
+
+    cp -r ../libtbag          "$TPARTY_LOCAL/include"
+    cp -r ../cmake/Modules/*  "$TPARTY_LOCAL/share/libtbag/cmake/"
 }
 
 LINUX_FUNC=runCommon
