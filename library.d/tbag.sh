@@ -37,8 +37,8 @@ function runCommon {
 
     if [[ ! -d "$TPARTY_LOCAL/share/libtbag/cmake" ]]; then mkdir -p "$TPARTY_LOCAL/share/libtbag/cmake"; fi
 
-    cp -r ../libtbag          "$TPARTY_LOCAL/include"
-    cp -r ../cmake/Modules/*  "$TPARTY_LOCAL/share/libtbag/cmake/"
+    cp -r ../libtbag  "$TPARTY_LOCAL/include"
+    cp -r ../cmake/*  "$TPARTY_LOCAL/share/libtbag/cmake/"
 }
 
 LINUX_FUNC=runCommon
