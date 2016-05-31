@@ -9,7 +9,7 @@ TPARTY_LOCAL=$TPARTY_HOME/local
 TPARTY_TMP=$TPARTY_HOME/tmp
 
 ## Don't remove DEPENDENCIES variable.
-DEPENDENCIES=
+DEPENDENCIES=openh264.sh:
 build-dependency $DEPENDENCIES
 
 NAME='ffmpeg-2.8.5'
@@ -27,6 +27,7 @@ FLAGS="$FLAGS --extra-cflags=-fPIC"
 FLAGS="$FLAGS --enable-static"
 FLAGS="$FLAGS --enable-shared"
 FLAGS="$FLAGS --disable-yasm"
+FLAGS="$FLAGS --enable-libopenh264" # BSD style.
 # Don't use GPL or nonfree flags:
 #FLAGS="$FLAGS --enable-gpl"
 #FLAGS="$FLAGS --enable-libass"
@@ -40,10 +41,12 @@ FLAGS="$FLAGS --disable-yasm"
 #FLAGS="$FLAGS --enable-libx264"
 #FLAGS="$FLAGS --enable-libx265"
 #FLAGS="$FLAGS --enable-nonfree"
+# Self Deprecated:
+#FLAGS="$FLAGS --pkgconfigdir=$TPARTY_LOCAL/lib/pkgconfig"
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
-    ./configure $FLAGS >> $LOG_PATH
+    PKG_CONFIG_PATH=$TPARTY_LOCAL/lib/pkgconfig ./configure $FLAGS >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make $THREAD_FLAG >> $LOG_PATH
