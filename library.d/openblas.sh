@@ -26,9 +26,13 @@ function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
     patch -p1 < $TPARTY_HOME/library.d/openblas-0.2.15.fix.diff >> $LOG_PATH
 
+    #code=$?; [[ $code != 0 ]] && exit $code
+    #make FC=gfortran DYNAMIC_ARCH=1 >> $LOG_PATH
+
+    # Don't use THREAD_FLAG.
+    # Warning: -jN forced in submake: disabling jobserver mode.
     code=$?; [[ $code != 0 ]] && exit $code
-    #make FC=gfortran DYNAMIC_ARCH=1 $THREAD_FLAG >> $LOG_PATH
-    make ONLY_CBLAS=1 NO_LAPACKE=1 DYNAMIC_ARCH=1 $THREAD_FLAG >> $LOG_PATH
+    make ONLY_CBLAS=1 NO_LAPACKE=1 DYNAMIC_ARCH=1 "CFLAGS=-Wno-unused-but-set-variable -Wno-unused-variable -Wno-uninitialized" >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make PREFIX=$TPARTY_LOCAL install >> $LOG_PATH
