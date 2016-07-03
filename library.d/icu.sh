@@ -13,10 +13,10 @@ DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
 NAME='icu'
-URL='http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-src.zip'
-MD5='f797503ecaebf1d38920013dc7893066'
+URL='http://download.icu-project.org/files/icu4c/57.1/icu4c-57_1-src.tgz'
+MD5='976734806026a4ef8bdd17937c8898b9'
 TEMP_DIR="$TPARTY_TMP/build"
-DEST_NAME="$NAME.zip"
+DEST_NAME="$NAME.tgz"
 WORK_NAME="$NAME/source"
 ALREADY="$TPARTY_LOCAL/include/unicode/utf8.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
