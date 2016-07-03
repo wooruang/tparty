@@ -24,7 +24,8 @@ THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
-    ./configure --with-data-packaging=static --prefix=$TPARTY_LOCAL >> $LOG_PATH
+    #./configure --with-data-packaging=static --prefix=$TPARTY_LOCAL >> $LOG_PATH
+    ./configure --disable-shared --enable-static prefix=$TPARTY_LOCAL >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make >> $LOG_PATH
