@@ -23,22 +23,21 @@ LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
 function runCommon {
+    # Remove options:
+    # -DWITH_CUDA=OFF -DWITH_FFMPEG=OFF -DBUILD_opencv_python2=OFF
     code=$?; [[ $code != 0 ]] && exit $code
     cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
           -DBUILD_SHARED_LIBS=ON               \
           -DCMAKE_BUILD_TYPE=Release           \
           -DCMAKE_CXX_FLAGS=-fPIC              \
           -DCMAKE_C_FLAGS=-fPIC                \
-          -DWITH_CUDA=OFF                      \
-          -DWITH_FFMPEG=OFF                    \
-          -DBUILD_opencv_python2=OFF           \
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
-    make $THREAD_FLAG >> $LOG_PATH
+    make $THREAD_FLAG install >> $LOG_PATH
 
-    code=$?; [[ $code != 0 ]] && exit $code
-    make install >> $LOG_PATH
+    #code=$?; [[ $code != 0 ]] && exit $code
+    #make install >> $LOG_PATH
 }
 
 LINUX_FUNC=runCommon
