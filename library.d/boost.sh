@@ -15,6 +15,11 @@ build-dependency $DEPENDENCIES
 NAME='boost_1_60_0'
 URL='http://pilotfiber.dl.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.gz'
 MD5='28f58b9a33469388302110562bdf6188'
+
+NAME='boost_1_59_0'
+URL='http://pilotfiber.dl.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.gz'
+MD5='51528a0e3b33d9e10aaa311d9eb451e3'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
