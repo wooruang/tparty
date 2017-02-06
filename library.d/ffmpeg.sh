@@ -26,7 +26,7 @@ FLAGS="--prefix=$TPARTY_LOCAL"
 FLAGS="$FLAGS --extra-cflags=-fPIC"
 FLAGS="$FLAGS --enable-static"
 FLAGS="$FLAGS --enable-shared"
-FLAGS="$FLAGS --disable-yasm"
+FLAGS="$FLAGS --enable-yasm"
 FLAGS="$FLAGS --enable-libopenh264" # BSD style.
 # Don't use GPL or nonfree flags:
 #FLAGS="$FLAGS --enable-gpl"
