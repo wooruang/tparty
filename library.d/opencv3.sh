@@ -12,9 +12,14 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
-NAME='opencv-3.1.0'
-URL='https://codeload.github.com/Itseez/opencv/tar.gz/3.1.0'
-MD5='70e1dd07f0aa06606f1bc0e3fa15abd3'
+#NAME='opencv-3.1.0'
+#URL='https://codeload.github.com/Itseez/opencv/tar.gz/3.1.0'
+#MD5='70e1dd07f0aa06606f1bc0e3fa15abd3'
+
+NAME='opencv-3.2.0'
+URL='https://codeload.github.com/opencv/opencv/tar.gz/3.2.0'
+MD5='a43b65488124ba33dde195fea9041b70'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME/build"
@@ -29,8 +34,6 @@ function runCommon {
     cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
           -DBUILD_SHARED_LIBS=ON               \
           -DCMAKE_BUILD_TYPE=Release           \
-          -DCMAKE_CXX_FLAGS=-fPIC              \
-          -DCMAKE_C_FLAGS=-fPIC                \
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
