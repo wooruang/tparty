@@ -34,6 +34,8 @@ function runCommon {
     cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
           -DBUILD_SHARED_LIBS=ON               \
           -DCMAKE_BUILD_TYPE=Release           \
+          -DWITH_LAPACK=OFF                    \
+          -DWITH_CUDA=OFF                      \
           -G 'Unix Makefiles' .. >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
