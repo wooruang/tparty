@@ -12,9 +12,14 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
-NAME='openh264-1.5.0'
-URL='https://codeload.github.com/cisco/openh264/tar.gz/v1.5.0'
-MD5='ac32a23821887cd2202700aa59c1d4be'
+#NAME='openh264-1.5.0'
+#URL='https://codeload.github.com/cisco/openh264/tar.gz/v1.5.0'
+#MD5='ac32a23821887cd2202700aa59c1d4be'
+
+NAME='openh264-1.7.0'
+URL='https://codeload.github.com/cisco/openh264/tar.gz/v1.7.0'
+MD5='93da4e76cfda7ede8fd2df51b0021efd'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"

@@ -15,12 +15,24 @@ build-dependency $DEPENDENCIES
 NAME='wxWidgets-3.1.0'
 URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.0'
 MD5='6d2af648c5d0b2d366e7050d06b9a89f'
+
+#NAME='wxWidgets-3.0.3.1'
+#URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.0.3.1'
+#MD5='bd7ece1a472d85d44edf7600834316e4'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
-ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
+#ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
+ALREADY="$TPARTY_LOCAL/include/wx-3.0/wx/config.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
+
+FLAGS="--prefix=$TPARTY_LOCAL"
+FLAGS="$FLAGS --enable-cxx11"
+FLAGS="$FLAGS --enable-stl"
+FLAGS="$FLAGS --disable-unicode"
+FLAGS="$FLAGS --disable-debug"
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
@@ -29,7 +41,7 @@ function runCommon {
     #export OBJCXXFLAGS="-fPIC -stdlib=libc++ -std=c++11"
     #export LDFLAGS="-stdlib=libc++"
     #./configure --prefix=$TPARTY_LOCAL >> $LOG_PATH
-    ./configure --prefix=$TPARTY_LOCAL --enable-cxx11 --disable-unicode --enable-stl --disable-debug >> $LOG_PATH
+    ./configure $FLAGS >> $LOG_PATH
 
     code=$?; [[ $code != 0 ]] && exit $code
     make $THREAD_FLAG >> $LOG_PATH
