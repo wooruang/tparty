@@ -15,16 +15,16 @@ build-dependency $DEPENDENCIES
 NAME='wxWidgets-3.1.0'
 URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.0'
 MD5='6d2af648c5d0b2d366e7050d06b9a89f'
+ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
 
 #NAME='wxWidgets-3.0.3.1'
 #URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.0.3.1'
 #MD5='bd7ece1a472d85d44edf7600834316e4'
+#ALREADY="$TPARTY_LOCAL/include/wx-3.0/wx/config.h"
 
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME"
-#ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
-ALREADY="$TPARTY_LOCAL/include/wx-3.0/wx/config.h"
 LOG_PATH="$TEMP_DIR/$NAME-`datetime`.log"
 THREAD_FLAG=`thread-flag`
 
