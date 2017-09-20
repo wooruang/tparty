@@ -22,7 +22,7 @@ build-dependency $DEPENDENCIES
 
 NAME='opencv-3.3.0'
 URL='https://codeload.github.com/opencv/opencv/tar.gz/3.3.0'
-MD5='eeedaec282a70aa2ea1d5152a372c990'
+MD5='98a4e4c6f23ec725e808a891dc11eec4'
 
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
