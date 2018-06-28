@@ -12,9 +12,14 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
-NAME='SFML-2.4.0'
-URL='https://codeload.github.com/SFML/SFML/tar.gz/2.4.0'
-MD5='4e09580bc162ffb347d5ecda17a8d026'
+#NAME='SFML-2.4.0'
+#URL='https://codeload.github.com/SFML/SFML/tar.gz/2.4.0'
+#MD5='4e09580bc162ffb347d5ecda17a8d026'
+
+NAME='SFML-2.5.0'
+URL='https://codeload.github.com/SFML/SFML/tar.gz/2.5.0'
+MD5='643b6bf93a90cf49d060b2d76466f089'
+
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.gz"
 WORK_NAME="$NAME/build"
@@ -24,8 +29,19 @@ THREAD_FLAG=`thread-flag`
 
 function runCommon {
     code=$?; [[ $code != 0 ]] && exit $code
+
+    # SFML 2.4.0
+    #cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
+    #      -DCMAKE_INSTALL_FRAMEWORK_PREFIX=$TPARTY_LOCAL/Library/Frameworks \
+    #      -DBUILD_SHARED_LIBS=ON               \
+    #      -DCMAKE_BUILD_TYPE=Release           \
+    #      -DCMAKE_CXX_FLAGS=-fPIC              \
+    #      -DCMAKE_C_FLAGS=-fPIC                \
+    #      -G 'Unix Makefiles' .. >> $LOG_PATH
+
+    # SFML 2.5.0
     cmake -DCMAKE_INSTALL_PREFIX=$TPARTY_LOCAL \
-          -DCMAKE_INSTALL_FRAMEWORK_PREFIX=$TPARTY_LOCAL/Library/Frameworks \
+          -DSFML_DEPENDENCIES_INSTALL_PREFIX=$TPARTY_LOCAL/Library/Frameworks \
           -DBUILD_SHARED_LIBS=ON               \
           -DCMAKE_BUILD_TYPE=Release           \
           -DCMAKE_CXX_FLAGS=-fPIC              \
