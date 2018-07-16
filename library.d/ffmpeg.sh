@@ -16,9 +16,13 @@ build-dependency $DEPENDENCIES
 #URL='http://ffmpeg.org/releases/ffmpeg-2.8.5.tar.bz2'
 #MD5='989d9024313c2b7e2eeaed58b751c0ee'
 
-NAME='ffmpeg-3.3.3'
-URL='http://ffmpeg.org/releases/ffmpeg-3.3.3.tar.bz2'
-MD5='b3f4a71445171b2a2bb71fb6df5ced0f'
+#NAME='ffmpeg-3.3.3'
+#URL='http://ffmpeg.org/releases/ffmpeg-3.3.3.tar.bz2'
+#MD5='b3f4a71445171b2a2bb71fb6df5ced0f'
+
+NAME='ffmpeg-3.3.7'
+URL='http://ffmpeg.org/releases/ffmpeg-3.3.7.tar.bz2'
+MD5='4afe1d2d17269f15b482c28e4c78e726'
 
 TEMP_DIR="$TPARTY_TMP/build"
 DEST_NAME="$NAME.tar.bz2"

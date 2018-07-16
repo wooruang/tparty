@@ -1,5 +1,4 @@
 #!/bin/bash
-
 if [[ -z $TPARTY_HOME ]]; then
     echo 'Not defined TPARTY_HOME variable.'
     exit 1
@@ -16,6 +15,12 @@ NAME='wxWidgets-3.1.0'
 URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.0'
 MD5='6d2af648c5d0b2d366e7050d06b9a89f'
 ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
+
+# Need to command: 'git submodule update --init'
+#NAME='wxWidgets-3.1.1'
+#URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.1'
+#MD5='f6ea5303455bb6817f83b9eeb55879ec'
+#ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
 
 #NAME='wxWidgets-3.0.3.1'
 #URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.0.3.1'
