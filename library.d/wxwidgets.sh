@@ -11,9 +11,14 @@ TPARTY_TMP=$TPARTY_HOME/tmp
 DEPENDENCIES=
 build-dependency $DEPENDENCIES
 
-NAME='wxWidgets-3.1.0'
-URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.0'
-MD5='6d2af648c5d0b2d366e7050d06b9a89f'
+#NAME='wxWidgets-3.1.0'
+#URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.0'
+#MD5='6d2af648c5d0b2d366e7050d06b9a89f'
+#ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
+
+NAME='wxWidgets-3.1.1'
+URL='https://codeload.github.com/wxWidgets/wxWidgets/tar.gz/v3.1.1'
+MD5=''
 ALREADY="$TPARTY_LOCAL/include/wx-3.1/wx/config.h"
 
 # Need to command: 'git submodule update --init'
